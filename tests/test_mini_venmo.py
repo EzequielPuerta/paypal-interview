@@ -28,3 +28,19 @@ def test_payments_between_users():
     assert bob.credit == 0
     assert charly.balance == 30
     assert charly.credit == 0
+
+
+def test_render_feed():
+    venmo = MiniVenmo()
+    alice = venmo.create_user("Alice")
+    bob = venmo.create_user("Bob")
+
+    alice.pay(bob, 5, description="Coffee")
+    bob.pay(alice, 15, description="Lunch")
+
+    expected_text = (
+        "Alice paid Bob $5.00 for Coffee\n"
+        "Bob paid Alice $15.00 for Lunch"
+    )
+    text = venmo.render_feed()
+    assert text == expected_text

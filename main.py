@@ -25,5 +25,10 @@ def main():
     print(f"Bob's activity: {len(bob_activity)} payments")
     print(f"Charly's activity: {len(charly_activity)} payments")
 
+    # 3.b) Implement MiniVenmo.render_feed() method
+    feed_text = venmo.render_feed()
+    print("Activity Feed:")
+    print(feed_text)
+
 if __name__ == "__main__":
     main()
