@@ -30,5 +30,10 @@ def main():
     print("Activity Feed:")
     print(feed_text)
 
+    # 4) Implement User.add_friend() method
+    alice.add_friend(bob)
+    print(f"Alice's friends: {alice.friends}")
+    print(f"Bob's friends: {bob.friends}")
+
 if __name__ == "__main__":
     main()

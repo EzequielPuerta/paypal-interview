@@ -70,3 +70,14 @@ def test_user_retrieve_activity():
     assert bob_payment.from_user == bob
     assert bob_payment.to_user == alice
     assert bob_payment.description == "Lunch"
+
+
+def test_adding_friends():
+    alice = User("Alice", 100, 50)
+    bob = User("Bob", 50, 25)
+
+    assert bob not in alice.friends
+    assert alice not in bob.friends
+    alice.add_friend(bob)
+    assert bob in alice.friends
+    assert alice in bob.friends
