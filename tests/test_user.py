@@ -2,8 +2,8 @@ from src.user import User
 from src.events.friend_added import FriendAdded
 
 
-def test_user_creation():
-    user = User("Alice", 100, 50)
+def test_user_creation(alice):
+    user = alice
     assert user.name == "Alice"
     assert user.balance == 100
     assert user.credit == 50
@@ -16,10 +16,7 @@ def test_user_default_values():
     assert user.credit == 0
 
 
-def test_user_payment_with_enough_balance():
-    alice = User("Alice", 100, 50)
-    bob = User("Bob", 50, 25)
-
+def test_user_payment_with_enough_balance(alice, bob):
     assert alice.balance == 100
     assert alice.credit == 50
     assert bob.balance == 50
@@ -32,10 +29,7 @@ def test_user_payment_with_enough_balance():
     assert bob.credit == 25
 
 
-def test_user_payment_with_insufficient_balance():
-    alice = User("Alice", 100, 50)
-    bob = User("Bob", 50, 25)
-
+def test_user_payment_with_insufficient_balance(alice, bob):
     assert alice.balance == 100
     assert alice.credit == 50
     assert bob.balance == 50
@@ -48,10 +42,7 @@ def test_user_payment_with_insufficient_balance():
     assert bob.credit == 25
 
 
-def test_user_retrieve_activity():
-    alice = User("Alice", 100, 50)
-    bob = User("Bob", 50, 25)
-
+def test_user_retrieve_activity(alice, bob):
     alice.pay(bob, 5, description="Coffee")
     bob.pay(alice, 15, description="Lunch")
 
@@ -73,10 +64,7 @@ def test_user_retrieve_activity():
     assert bob_payment.description == "Lunch"
 
 
-def test_adding_friends():
-    alice = User("Alice", 100, 50)
-    bob = User("Bob", 50, 25)
-
+def test_adding_friends(alice, bob):
     assert bob not in alice.friends
     assert alice not in bob.friends
     alice.add_friend(bob)
@@ -84,10 +72,7 @@ def test_adding_friends():
     assert alice in bob.friends
 
 
-def test_adding_friends_appears_in_retrieve_activity():
-    alice = User("Alice", 100, 50)
-    bob = User("Bob", 50, 25)
-
+def test_adding_friends_appears_in_retrieve_activity(alice, bob):
     assert len(alice.retrieve_activity()) == 0
     assert len(bob.retrieve_activity()) == 0
     alice.add_friend(bob)
