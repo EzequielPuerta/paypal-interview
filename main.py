@@ -13,8 +13,17 @@ def main():
     print(f"Users amount: {len(venmo.USERS)}")
 
     # 2) Implement User.pay() method
-    alice.pay(bob, 50)
-    bob.pay(charly, 30)
+    alice.pay(bob, 50, description="Dinner")
+    bob.pay(charly, 30, description="Lunch")
+
+    # 3.a) Implement User.retrieve_activity() method
+    alice_activity = alice.retrieve_activity()
+    bob_activity = bob.retrieve_activity()
+    charly_activity = charly.retrieve_activity()
+
+    print(f"Alice's activity: {len(alice_activity)} payments")
+    print(f"Bob's activity: {len(bob_activity)} payments")
+    print(f"Charly's activity: {len(charly_activity)} payments")
 
 if __name__ == "__main__":
     main()
