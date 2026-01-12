@@ -1,4 +1,5 @@
 from src.user import User
+from src.events.friend_added import FriendAdded
 
 
 def test_user_creation():
@@ -81,3 +82,21 @@ def test_adding_friends():
     alice.add_friend(bob)
     assert bob in alice.friends
     assert alice in bob.friends
+
+
+def test_adding_friends_appears_in_retrieve_activity():
+    alice = User("Alice", 100, 50)
+    bob = User("Bob", 50, 25)
+
+    assert len(alice.retrieve_activity()) == 0
+    assert len(bob.retrieve_activity()) == 0
+    alice.add_friend(bob)
+
+    assert len(alice.retrieve_activity()) == 1
+    assert len(bob.retrieve_activity()) == 0
+
+    event = alice.retrieve_activity()[0]
+    assert isinstance(event, FriendAdded)
+    assert event.timestamp is not None
+    assert event.user1 == alice
+    assert event.user2 == bob

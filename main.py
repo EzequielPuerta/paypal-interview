@@ -35,5 +35,11 @@ def main():
     print(f"Alice's friends: {alice.friends}")
     print(f"Bob's friends: {bob.friends}")
 
+    # 5) Implement event rendering for sorted payments and friend additions
+    alice.pay(charly, 5, description="Breakfast")
+    feed_text = venmo.render_feed()
+    print("Updated Activity Feed:")
+    print(feed_text)
+
 if __name__ == "__main__":
     main()

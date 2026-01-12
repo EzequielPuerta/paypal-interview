@@ -44,3 +44,21 @@ def test_render_feed():
     )
     text = venmo.render_feed()
     assert text == expected_text
+
+
+def test_render_feed_with_friends_activity():
+    venmo = MiniVenmo()
+    alice = venmo.create_user("Alice")
+    bob = venmo.create_user("Bob")
+
+    bob.pay(alice, 10, description="Snacks")
+    alice.add_friend(bob)
+    alice.pay(bob, 20, description="Movie Tickets")
+
+    expected_text = (
+        "Bob paid Alice $10.00 for Snacks\n"
+        "Alice added Bob as a friend\n"
+        "Alice paid Bob $20.00 for Movie Tickets"
+    )
+    text = venmo.render_feed()
+    assert text == expected_text

@@ -10,7 +10,8 @@ class MiniVenmo:
         return user
 
     def render_feed(self):
-        feed_lines = [str(payment)
-                      for user in self.USERS.values()
-                      for payment in user.retrieve_activity()]
+        feed = [event
+                for user in self.USERS.values()
+                for event in user.retrieve_activity()]
+        feed_lines = [str(event) for event in sorted(feed, key=lambda e: e.timestamp)]
         return "\n".join(feed_lines)

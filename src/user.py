@@ -1,4 +1,6 @@
-from src.payment import Payment
+from src.events.payment import Payment
+from src.events.friend_added import FriendAdded
+
 
 class User:
     def __init__(self, name, initial_balance=0, initial_credit=0):
@@ -16,10 +18,7 @@ class User:
         return self._activity.copy()
 
     def add_friend(self, user):
-        if user not in self._friends:
-            self._friends.append(user)
-        if self not in user._friends:
-            user._friends.append(self)
+        FriendAdded(self, user).process()
 
     @property
     def friends(self):

@@ -1,5 +1,9 @@
-class Payment:
+from src.events.event import Event
+
+
+class Payment(Event):
     def __init__(self, amount, from_user, to_user, description):
+        super().__init__()
         self.amount = amount
         self.from_user = from_user
         self.to_user = to_user

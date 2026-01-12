@@ -1,5 +1,5 @@
 from src.user import User
-from src.payment import Payment
+from src.events.payment import Payment
 
 
 def test_payment_creation():
